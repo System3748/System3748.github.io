@@ -10,14 +10,17 @@
 
             /* 開啟另一個網頁 */
             function openWin() {
-                //new_win = window.open("http://demo2.cinc.biz/html5-postmessage/text-new.html");
                 new_win = window.open("http://localhost:7456/build/");
+                local_win = window.frames["GameFrame"];
+                local_win.location = "http://localhost:7456/build/";
             }
 
             /* 傳送文字訊息 */
             function sendMsg() {
                 var msg = document.getElementById("msg_txt").value;
-                new_win.postMessage(msg, "http://localhost:7456");//表示要送給demo2.example.com網域
+                
+                new_win.postMessage(msg, "http://localhost:7456");//表示要送給另一分頁的本地Cocos Creator網域
+                local_win.postMessage(msg, "http://localhost:7456");//表示要送給當前iframe的本地Cocos Creator網域
             }
         </script>
     </head>
@@ -27,5 +30,7 @@
         1.<button onclick="openWin()">開啟接收訊息頁面</button><br>
         2.<input id="msg_txt"  type="text" value="msg test"/>
         <button onclick="sendMsg()">傳送文字訊息到接收頁面</button>
+
+        <iframe name="GameFrame" class="game" width= 960px height=640px style='position:absolute;z-index:0;top:150px;left:10px;padding:0px;margin:0px'></iframe>
     </body>
 </html>

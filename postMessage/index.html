@@ -8,12 +8,14 @@
     </style>
     <script>
         var new_win;
+        var game_win;
 
         /* 開啟另一個網頁 */
         function openWin() {
             new_win = window.open("http://localhost:7456/build/");
-            local_win = window.frames["GameFrame"];
-            local_win.location = "http://localhost:7456/build/game1.html";
+            
+            game_win = window.frames["GameFrame"];
+            game_win.location = "http://localhost:7456/build/index.html";
         }
 
         /* 傳送文字訊息 */
@@ -21,7 +23,7 @@
             var msg = document.getElementById("msg_txt").value;
 
             new_win.postMessage(msg, "http://localhost:7456");      //表示要送給另一分頁的Cocos Creator本地網域
-            local_win.postMessage(msg, "http://localhost:7456/build/");    //表示要送給當前iframe的Cocos Creator本地網域
+            game_win.postMessage(msg, "http://localhost:7456/build/");    //表示要送給當前iframe的Cocos Creator本地網域
         }
     </script>
 </head>
